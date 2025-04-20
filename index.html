@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toyota - Let's Go Places</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon toyota.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        color: #333;
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: #e10e17;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background-color: #b00c14;
+        transform: translateY(-2px);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+        font-size: 2.5rem;
+        color: #222;
+        position: relative;
+      }
+
+      .section-title:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: #e10e17;
+        margin: 15px auto;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .logo {
+        height: 80px;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 30px;
+      }
+
+      nav ul li a {
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #e10e17;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("https://images.unsplash.com/photo-1620882788693-cd891b20837d?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+            no-repeat center center/cover;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding-top: 80px;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Models Section */
+      .models {
+        padding: 100px 0;
+        background-color: #f9f9f9;
+      }
+
+      .models-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .model-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .model-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .model-img {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .model-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .model-card:hover .model-img img {
+        transform: scale(1.1);
+      }
+
+      .model-info {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .model-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #222;
+      }
+
+      .model-info p {
+        margin-bottom: 20px;
+        color: #666;
+      }
+
+      .model-price {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #e10e17;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      /* Gallery Section */
+      .gallery {
+        padding: 100px 0;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+
+      .gallery-item {
+        height: 200px;
+        overflow: hidden;
+        border-radius: 5px;
+        position: relative;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        height: 300px;
+      }
+
+      .gallery-item:nth-child(6) {
+        grid-column: span 2;
+        height: 300px;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 100px 0;
+        background-color: #f1f1f1;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+
+      .feature-item {
+        text-align: center;
+        padding: 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        color: #e10e17;
+        margin-bottom: 20px;
+      }
+
+      .feature-item h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #222;
+        color: white;
+        padding: 70px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+        margin-bottom: 50px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background-color: #e10e17;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #bbb;
+        transition: color 0.3s;
+      }
+
+      .footer-column ul li a:hover {
+        color: white;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #333;
+        border-radius: 50%;
+        color: white;
+        transition: all 0.3s;
+      }
+
+      .social-links a:hover {
+        background-color: #e10e17;
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        color: #bbb;
+        font-size: 0.9rem;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-container {
+          flex-direction: column;
+          padding: 15px;
+        }
+
+        nav ul {
+          margin-top: 15px;
+        }
+
+        nav ul li {
+          margin-left: 15px;
+          margin-right: 15px;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-item:nth-child(1),
+        .gallery-item:nth-child(6) {
+          grid-column: span 1;
+          height: 200px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .models-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container header-container">
+        <a href="#">
+          <img
+            src="/assets/toyota-logo-png_seeklogo-141406.png"
+            alt="Toyota Logo"
+            class="logo"
+          />
+        </a>
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#models">Models</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Experience the Toyota Difference</h1>
+        <p>
+          Discover our latest lineup of reliable, innovative vehicles designed
+          to take you further.
+        </p>
+        <a href="#models" class="btn">Explore Models</a>
+      </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models" id="models">
+      <div class="container">
+        <h2 class="section-title">Our Latest Models</h2>
+        <div class="models-grid">
+          <div class="model-card">
+            <div class="model-img">
+              <img src="/assets/toyota-gr-corolla.avif" alt="Toyota Corolla" />
+            </div>
+            <div class="model-info">
+              <h3>Corolla</h3>
+              <p>The perfect blend of style, efficiency, and reliability.</p>
+              <span class="model-price">Starting at $20,075</span>
+              <a href="#" class="btn">Learn More</a>
+            </div>
+          </div>
+
+          <div class="model-card">
+            <div class="model-img">
+              <img src="/assets//2017-Toyota-RAV4-109.avif" alt="Toyota RAV4" />
+            </div>
+            <div class="model-info">
+              <h3>RAV4</h3>
+              <p>Adventure-ready SUV with legendary Toyota reliability.</p>
+              <span class="model-price">Starting at $26,975</span>
+              <a href="#" class="btn">Learn More</a>
+            </div>
+          </div>
+
+          <div class="model-card">
+            <div class="model-img">
+              <img
+                src="/assets/2025-toyota-camry-xse-awd-123-66993cc94cc40.avif"
+                alt="Toyota Camry"
+              />
+            </div>
+            <div class="model-info">
+              <h3>Camry</h3>
+              <p>Sophisticated sedan with exceptional performance.</p>
+              <span class="model-price">Starting at $25,295</span>
+              <a href="#" class="btn">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <h2 class="section-title">Toyota Gallery</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img
+              src="/assets/2025-toyota-gr-supra-102-668c519da0fe1.avif"
+              alt="Toyota GR Supra"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="/assets/2021-toyota-highlander-xse-mmp-1-1603382748.avif"
+              alt="Toyota Highlander"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="/assets//20211214-bev-22-1639491053.avif"
+              alt="Toyota Tacoma"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="/assets/2025-toyota-4runner-limited-108-jpg-6615620b104f8.avif"
+              alt="Toyota 4Runner"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="/assets/2023-toyota-prius-front-three-quarters-in-motion-2-1670948361.avif"
+              alt="Toyota Prius"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="/assets/2022-toyota-tundra-trd-pro-02-1641427411.avif"
+              alt="Toyota Tundra"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <h2 class="section-title">Why Choose Toyota</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Safety First</h3>
+            <p>
+              Toyota Safety Sense™ comes standard on all new vehicles, helping
+              to protect you and your loved ones.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Eco-Friendly</h3>
+            <p>
+              Our hybrid and electric vehicles help reduce emissions without
+              compromising performance.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3>Reliability</h3>
+            <p>
+              Toyota's reputation for reliability means you can count on your
+              vehicle for years to come.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>About Toyota</h3>
+            <p>
+              Toyota is committed to building vehicles that people love, with
+              quality, durability and reliability you can count on.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#models">Models</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Popular Models</h3>
+            <ul>
+              <li><a href="#">Corolla</a></li>
+              <li><a href="#">Camry</a></li>
+              <li><a href="#">RAV4</a></li>
+              <li><a href="#">Highlander</a></li>
+              <li><a href="#">Tacoma</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul>
+              <li>
+                <i class="fas fa-map-marker-alt"></i> Toyota Motor Sales,
+                U.S.A., Inc.
+              </li>
+              <li><i class="fas fa-phone"></i> 1-800-331-4331</li>
+              <li>
+                <i class="fas fa-envelope"></i> customer.support@toyota.com
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 Toyota Motor Sales, U.S.A., Inc. All information applies
+            to U.S. vehicles only.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
